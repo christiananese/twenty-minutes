@@ -1,7 +1,8 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
+import { fetchAPI } from '../lib/api';
 
-export default function Home() {
+export default function Home({ posts }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -10,8 +11,16 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Starter</h1>
+        <h1 className={styles.title}>TwentyMinutes Blog</h1>
+        {posts.map((post, index) => (
+          <div key={index}>{post.title}</div>
+        ))}
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const posts = await fetchAPI('/posts');
+  return { props: { posts } };
 }
