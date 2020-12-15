@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CommentEntity } from './entities/comment';
 import { PostEntity } from './entities/post';
+import { createRandomPost } from './posts.seed';
 
 /**
  * Helper function to simulate db filter by slug
@@ -16,6 +17,11 @@ const findPostBySlug = (postList, slug) => {
 @Injectable()
 export class PostsService {
   private readonly posts: PostEntity[] = [];
+
+  constructor() {
+    const posts = createRandomPost(20);
+    this.posts.push(...posts);
+  }
 
   findAll(): PostEntity[] {
     return this.posts;
@@ -38,6 +44,6 @@ export class PostsService {
     // 3. Push comment to ths posts comments
     // 4. "persist" post
     // 5. return post entity
-    return `Create a new commnet for post ${slug} with ${comment}`;
+    return `Create a new comment for post ${slug} with ${comment}`;
   }
 }

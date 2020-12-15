@@ -5,5 +5,6 @@ export class PostEntity {
   slug: string;
   excerpt: string;
   featureImage: string;
+  content: string;
   comments: CommentEntity[];
 }
