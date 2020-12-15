@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import { fetchAPI } from '../lib/api';
+import { GetStaticProps } from 'next';
 
 export default function Home({ posts }) {
   return (
@@ -20,7 +21,7 @@ export default function Home({ posts }) {
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const posts = await fetchAPI('/posts');
   return { props: { posts } };
-}
+};
