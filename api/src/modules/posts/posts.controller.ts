@@ -39,7 +39,7 @@ export class PostsController {
     description: 'Get all comments for a blog post',
   })
   @ApiParam({ name: 'slug', example: 'my-slug-1' })
-  findComments(@Param('slug') slug: string): string {
+  async findComments(@Param('slug') slug: string): Promise<CommentEntity[]> {
     return this.postsService.findComments(slug);
   }
 

@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CommentEntity } from './entities/comment';
 import { PostEntity } from './entities/post';
 import { createRandomPost } from './posts.seed';
 
 /**
- * Helper function to simulate db filter by slug
+ * Helper function to simulate a DB filter by slug
  * @param postList the list of posts
  * @param slug the posts slug
  */
@@ -28,8 +28,11 @@ export class PostsService {
   }
 
   findOne(slug: string): PostEntity {
-    // 1. find post by given slug
-    return findPostBySlug(this.posts, slug);
+    const post = findPostBySlug(this.posts, slug);
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+    return post;
   }
 
   findComments(slug: string): string {
