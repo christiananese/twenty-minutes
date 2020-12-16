@@ -9,7 +9,7 @@ import { createRandomPost } from './posts.seed';
  * @param slug the posts slug
  */
 const findPostBySlug = (postList, slug) => {
-  return postList.filter((post) => {
+  return postList.find((post) => {
     return post.slug === slug;
   });
 };
