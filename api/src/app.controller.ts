@@ -8,7 +8,7 @@ export class AppController {
 
   @Get()
   @ApiTags('Healthcheck')
-  getHello(): string {
+  ping(): string {
     return this.appService.ping();
   }
 }
