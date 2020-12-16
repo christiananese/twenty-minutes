@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { PostsService } from './posts.service';
 
@@ -26,19 +27,39 @@ describe('PostsService', () => {
 
     it('should return an empty array if there are no posts', async () => {
       jest.spyOn(postService, 'findAll').mockImplementation(() => []);
+
+      expect(postService.findAll).not.toHaveBeenCalled();
+
       const posts = await postService.findAll();
       expect(postService.findAll).toHaveBeenCalled();
+
       expect(posts.length).toBe(0);
     });
   });
 
   describe('findOne post', () => {
-    it('should get a post by SLUG', async () => {
-      expect(true).toBe(true);
+    it('should get a post by slug', async () => {
+      const slug = 'hello';
+      const mockPost = {
+        title: 'Hello',
+        slug,
+        content: 'hello',
+        featureImage: 'hello',
+        comments: [],
+      };
+
+      jest.spyOn(postService, 'findOne').mockResolvedValue(mockPost);
+
+      const result = await postService.findOne(slug);
+      expect(postService.findOne).toHaveBeenCalled();
+
+      expect(result).toEqual(mockPost);
     });
 
-    it('throws an error as a post with the provided SLUG is found', async () => {
-      expect(true).toBe(true);
+    it('throws an error as a post with the provided slug is found', async () => {
+      const slug = 'not-existing-slug';
+
+      expect(postService.findOne(slug)).rejects.toThrow(NotFoundException);
     });
   });
 });

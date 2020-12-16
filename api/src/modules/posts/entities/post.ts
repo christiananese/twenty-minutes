@@ -13,6 +13,7 @@ export class PostEntity {
     type: String,
     description: 'The posts unique slug',
     example: 'A short description what the articel is about',
+    required: true,
   })
   slug: string;
 

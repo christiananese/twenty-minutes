@@ -27,7 +27,7 @@ export class PostsService {
     return this.posts;
   }
 
-  findOne(slug: string): PostEntity {
+  async findOne(slug: string): Promise<PostEntity> {
     const post = findPostBySlug(this.posts, slug);
     if (!post) {
       throw new NotFoundException('Post not found');
