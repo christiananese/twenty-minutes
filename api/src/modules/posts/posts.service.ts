@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateCommentDTO } from './dto/comment.dto';
 import { CommentEntity } from './entities/comment';
 import { PostEntity } from './entities/post';
 import { createRandomPost } from './posts.seed';
@@ -35,18 +36,22 @@ export class PostsService {
     return post;
   }
 
-  findComments(slug: string): string {
-    // 1. find post by given slug
-    // 2. return the posts comments
-    return `Return a all comments for post ${slug}`;
+  async findComments(slug: string): Promise<CommentEntity[]> {
+    const post = await this.findOne(slug);
+    return post.comments;
   }
 
-  createComment(slug: string, comment: CommentEntity): string {
-    // 1. find post by given slug
-    // 2. create new comment with provided data
-    // 3. Push comment to ths posts comments
-    // 4. "persist" post
-    // 5. return post entity
-    return `Create a new comment for post ${slug} with ${comment}`;
+  async createComment(
+    slug: string,
+    commentData: CreateCommentDTO,
+  ): Promise<CommentEntity> {
+    const post = await this.findOne(slug);
+    // create new comment with provided data
+    const comment = new CommentEntity();
+    comment.name = commentData.name;
+    comment.text = commentData.text;
+    post.comments.push(comment);
+    // Normally we would "persist" the post to DB.
+    return comment;
   }
 }

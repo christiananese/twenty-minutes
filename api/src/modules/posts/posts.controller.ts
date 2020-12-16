@@ -1,5 +1,6 @@
 import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateCommentDTO } from './dto/comment.dto';
 import { CommentEntity } from './entities/comment';
 import { PostEntity } from './entities/post';
 import { PostsService } from './posts.service';
@@ -50,10 +51,10 @@ export class PostsController {
     description: 'Created new comment',
   })
   @ApiParam({ name: 'slug', example: 'my-slug-1' })
-  createComment(
+  async createComment(
     @Param('slug') slug: string,
-    @Body('comment') comment: CommentEntity,
-  ): string {
-    return this.postsService.createComment(slug, comment);
+    @Body() comment: CreateCommentDTO,
+  ): Promise<CommentEntity> {
+    return await this.postsService.createComment(slug, comment);
   }
 }

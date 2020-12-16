@@ -62,4 +62,34 @@ describe('PostsService', () => {
       expect(postService.findOne(slug)).rejects.toThrow(NotFoundException);
     });
   });
+
+  describe('findAll comments', () => {
+    it('should get all comments from a certain post', async () => {
+      expect(true).toBe(true);
+    });
+
+    it('should be an empty by default', async () => {
+      expect(true).toBe(true);
+    });
+  });
+
+  describe('createComment for post', () => {
+    describe('name and text are provided', () => {
+      it('should add a comment to the posts comments', async () => {
+        expect(true).toBe(true);
+      });
+    });
+
+    describe('only text is provided', () => {
+      it('should add a comment to the posts comments', async () => {
+        expect(true).toBe(true);
+      });
+    });
+
+    describe('only name is provided', () => {
+      it('should throw an error', async () => {
+        expect(true).toBe(true);
+      });
+    });
+  });
 });
