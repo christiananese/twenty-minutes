@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common';
 import { CreateCommentDTO } from './dto/comment.dto';
 import { CommentEntity } from './entities/comment';
 import { PostEntity } from './entities/post';
@@ -45,11 +49,20 @@ export class PostsService {
     slug: string,
     commentData: CreateCommentDTO,
   ): Promise<CommentEntity> {
+    if (!commentData.text) {
+      throw new UnprocessableEntityException('Text is required.');
+    }
     const post = await this.findOne(slug);
     // create new comment with provided data
     const comment = new CommentEntity();
     comment.name = commentData.name;
     comment.text = commentData.text;
+
+    const timestamp = new Date();
+
+    comment.createdAt = timestamp;
+    comment.updatedAt = timestamp;
+
     post.comments.push(comment);
     post.commentCount = post.comments.length;
 
