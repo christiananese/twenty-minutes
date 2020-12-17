@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Exclude } from 'class-transformer';
+import { BaseEntity } from './base';
 import { CommentEntity } from './comment';
 
-export class PostEntity {
+export class PostEntity extends BaseEntity {
   @ApiProperty({
     type: String,
     description: 'The posts title',

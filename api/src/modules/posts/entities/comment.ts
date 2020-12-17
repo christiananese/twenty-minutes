@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { BaseEntity } from './base';
 
-export class CommentEntity {
+export class CommentEntity extends BaseEntity {
   @ApiProperty({
     type: String,
     description: 'The name of the comments author',
