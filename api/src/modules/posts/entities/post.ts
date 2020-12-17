@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 import { CommentEntity } from './comment';
 
 export class PostEntity {
@@ -42,10 +43,19 @@ export class PostEntity {
   content: string;
 
   @ApiProperty({
+    type: Number,
+    description: 'The number of comment',
+    example: 0,
+    default: 0,
+  })
+  commentCount: number;
+
+  @ApiProperty({
     type: String,
     description: 'The blog posts comments',
     example: [],
     required: false,
   })
+  @Exclude()
   comments: CommentEntity[];
 }

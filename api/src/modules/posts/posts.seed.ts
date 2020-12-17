@@ -10,7 +10,8 @@ export const createRandomPost = (count: number): PostEntity[] => {
     post.title = faker.random.words(3);
     post.slug = `my-slug-${i}`;
     // just add the signature query-parameter in order to get actual different images
-    post.featureImage = `https://source.unsplash.com/random/800x600?sig=${i}`;
+    post.featureImage = `https://source.unsplash.com/random/900x600?sig=${i}`;
+
     post.excerpt = faker.random.words(9);
     post.content = faker.lorem.text();
 
@@ -26,6 +27,7 @@ export const createRandomPost = (count: number): PostEntity[] => {
     }
 
     post.comments = comments;
+    post.commentCount = comments.length;
 
     posts.push(post);
   }
