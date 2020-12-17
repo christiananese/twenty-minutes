@@ -15,7 +15,7 @@ export const createRandomPost = (count: number): PostEntity[] => {
     post.featureImage = `https://source.unsplash.com/random/900x600?sig=${i}`;
 
     post.excerpt = faker.random.words(9);
-    post.content = faker.lorem.text();
+    post.content = faker.lorem.paragraphs(5);
 
     // an article every 12 days
     const timeStamp = new Date(+new Date() - i * 1000000000);
