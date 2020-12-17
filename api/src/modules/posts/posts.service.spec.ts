@@ -41,11 +41,13 @@ describe('PostsService', () => {
     it('should get a post by slug', async () => {
       const slug = 'hello';
       const mockPost = {
+        id: 'uuid',
         title: 'Hello',
         slug,
         content: 'hello',
         featureImage: 'hello',
         comments: [],
+        commentCount: 0,
       };
 
       jest.spyOn(postService, 'findOne').mockResolvedValue(mockPost);
