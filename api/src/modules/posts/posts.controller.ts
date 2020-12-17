@@ -1,10 +1,20 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  ClassSerializerInterceptor,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Post,
+  UseInterceptors,
+} from '@nestjs/common';
 import { ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateCommentDTO } from './dto/comment.dto';
 import { CommentEntity } from './entities/comment';
 import { PostEntity } from './entities/post';
 import { PostsService } from './posts.service';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller('posts')
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}

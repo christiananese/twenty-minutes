@@ -51,7 +51,8 @@ export class PostsService {
     comment.name = commentData.name;
     comment.text = commentData.text;
     post.comments.push(comment);
-    // Normally we would "persist" the post to DB.
+    post.commentCount = post.comments.length;
+
     return comment;
   }
 }
