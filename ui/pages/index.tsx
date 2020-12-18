@@ -1,7 +1,7 @@
-import { fetchAPI } from '../lib/api';
 import PostCard, { PostProps } from '../components/PostCard';
 import { GetStaticProps } from 'next';
 import PageContainer from '../components/PageContainer';
+import PostAPI from '../lib/api/post';
 
 export default function Home({ posts }: { posts: PostProps[] }) {
   return (
@@ -25,6 +25,6 @@ export default function Home({ posts }: { posts: PostProps[] }) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = await fetchAPI('/posts');
+  const { data: posts } = await PostAPI.findAll();
   return { props: { posts } };
 };
