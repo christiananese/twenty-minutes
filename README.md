@@ -13,8 +13,8 @@ Inside the projects root directory:
 Make sure you have proper rights to execute scripts on your machine
 
 ```bash
-$ sh ./scripts/build.sh # builds api ande ui image
-$ sh ./scripts/startup.sh
+$ sh ./scripts/buildAndStart.sh # builds & start api and ui image
+$ sh ./scripts/startup.sh # start prebuild images
 ```
 
 If everything works:
