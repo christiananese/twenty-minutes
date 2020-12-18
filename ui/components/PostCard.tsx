@@ -21,13 +21,13 @@ const PostCard = ({ title, slug, excerpt, featureImage, isFeatured, commentCount
       <Link href={`posts/${slug}`}>
         <a>
           <div className="w-full">
-            <Image width="600" height="400" src={featureImage} />
+            <Image width="600" height="400" src={featureImage} alt={title} />
           </div>
           <div className="flex flex-col p-4">
             <h1 className="text-2xl">{title}</h1>
             <p className="text-base">{excerpt}</p>
             <div className="grid gap-4 grid-flow-col auto-cols-max">
-              <span>{commentCount} comments</span>
+              <span>{commentCount} Kommentare</span>
             </div>
           </div>
         </a>
