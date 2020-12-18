@@ -1,8 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useMutation, useQueryClient } from 'react-query';
+import CommentAPI from '../../lib/api/comment';
 
 interface CommentFormProps {
-  sluig: string;
+  slug: string;
   commentCount: number;
 }
 
@@ -12,13 +14,24 @@ interface CreateCommentInput {
 }
 
 export const CommentForm = ({ slug, commentCount }: CommentFormProps) => {
+  // Access the client
+  const queryClient = useQueryClient();
+
   const { register, handleSubmit, errors, reset } = useForm();
+
+  // Mutation
+  const mutation = useMutation((data: object) => CommentAPI.create(slug, data), {
+    onSuccess: () => {
+      // reset form
+      reset();
+      // Invalidate cached comments and refetch
+      queryClient.invalidateQueries('comments');
+    }
+  });
 
   const onSubmit = async (data: CreateCommentInput) => {
     // Send data to API
-
-    // reset form
-    reset();
+    mutation.mutate(data);
   };
 
   return (
