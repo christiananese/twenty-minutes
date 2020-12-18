@@ -46,8 +46,13 @@ const Post = ({ post, initialComments }: { post: PostProps; initialComments: Com
   }
 
   const { slug, updatedAt, commentCount, featureImage, content, title, excerpt } = post;
+  const [localCount, setLocalCount] = useState(commentCount);
 
   const { data: comments } = useComments(slug, initialComments);
+
+  useEffect(() => {
+    setLocalCount(comments.length || 0);
+  }, [comments.length]);
 
   return (
     <PageContainer>
@@ -58,12 +63,12 @@ const Post = ({ post, initialComments }: { post: PostProps; initialComments: Com
           <Image width="1200" height="600" layout="responsive" src={featureImage} />
         </div>
 
-        <PostMeta updatedAt={updatedAt} commentCount={commentCount} />
+        <PostMeta updatedAt={updatedAt} commentCount={localCount} />
 
         <PostBody title={title} excerpt={excerpt} content={content} />
 
         <CommentContainer>
-          <CommentForm slug={slug} commentCount={commentCount} />
+          <CommentForm slug={slug} commentCount={localCount} />
           <CommentList comments={comments} />
         </CommentContainer>
       </div>
