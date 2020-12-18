@@ -1,8 +1,12 @@
 import { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import 'tailwindcss/tailwind.css';
+import { DefaultSeo } from 'next-seo';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRouter } from 'next/dist/client/router';
+import siteConfig from '../configs/site-config';
+
+import 'tailwindcss/tailwind.css';
+
 // Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,6 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <DefaultSeo {...siteConfig.seo} />
       <AnimatePresence exitBeforeEnter initial={false}>
         <motion.div key={router.route} {...pageMotionProps}>
           <Component {...pageProps} />

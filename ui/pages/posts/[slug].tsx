@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { NextSeo } from 'next-seo';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
@@ -74,29 +75,32 @@ const Post = ({ post, initialComments }: { post: PostProps; initialComments: Com
   }, [comments.length]);
 
   return (
-    <PageContainer>
-      <motion.div variants={stagger} className="grid grid-cols-6 md:grid-cols-12 md:max-w-screen-lg">
-        <PostBackLink />
+    <>
+      <NextSeo title={title} />
+      <PageContainer>
+        <motion.div variants={stagger} className="grid grid-cols-6 md:grid-cols-12 md:max-w-screen-lg">
+          <PostBackLink />
 
-        {featureImage && (
-          <motion.div
-            variants={fadeInUp}
-            className="w-full rounded-lg overflow-hidden row-start-2 col-start-1 col-span-6 md:col-span-12"
-          >
-            <Image width="1200" height="600" layout="responsive" src={featureImage} />
-          </motion.div>
-        )}
+          {featureImage && (
+            <motion.div
+              variants={fadeInUp}
+              className="w-full rounded-lg overflow-hidden row-start-2 col-start-1 col-span-6 md:col-span-12"
+            >
+              <Image width="1200" height="600" layout="responsive" src={featureImage} />
+            </motion.div>
+          )}
 
-        <PostMeta updatedAt={updatedAt} commentCount={localCount} />
+          <PostMeta updatedAt={updatedAt} commentCount={localCount} />
 
-        <PostBody title={title} excerpt={excerpt} content={content} />
+          <PostBody title={title} excerpt={excerpt} content={content} />
 
-        <CommentContainer>
-          <CommentForm slug={slug} commentCount={localCount} />
-          <CommentList comments={comments} />
-        </CommentContainer>
-      </motion.div>
-    </PageContainer>
+          <CommentContainer>
+            <CommentForm slug={slug} commentCount={localCount} />
+            <CommentList comments={comments} />
+          </CommentContainer>
+        </motion.div>
+      </PageContainer>
+    </>
   );
 };
 
