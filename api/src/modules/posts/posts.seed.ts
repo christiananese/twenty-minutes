@@ -33,7 +33,7 @@ export const createRandomPost = (count: number): PostEntity[] => {
       comment.name = faker.name.firstName();
       comment.text = faker.lorem.text();
       // every hour a new comment
-      const t = new Date(+timeStamp + j * 3600000);
+      const t = new Date(+timeStamp + (commentCount - j) * 3600000);
 
       comment.createdAt = t;
       comment.updatedAt = t;
