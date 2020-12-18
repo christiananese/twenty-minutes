@@ -56,7 +56,8 @@ export const CommentForm = ({ slug, commentCount }: CommentFormProps) => {
             rows={3}
             ref={register({ required: true, maxLength: 200 })}
           ></textarea>
-          {errors.text && 'Kommentar ist leer'}
+
+          {errors.text && <span className="text-sm text-red-500">Kommentar ist leer</span>}
         </label>
         <button
           className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-700 disabled:opacity-50"

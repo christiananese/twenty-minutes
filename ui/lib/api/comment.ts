@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const SERVER_BASE_URL = 'http://localhost:5000/api';
+const SERVER_BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
 const CommentAPI = {
   findAll: (slug: string) => axios.get(`${SERVER_BASE_URL}/posts/${slug}/comments`).then((response) => response.data),
