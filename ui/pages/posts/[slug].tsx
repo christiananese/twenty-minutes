@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 import PageContainer from '../../components/PageContainer';
-import { CommentContainer } from '../../components/Comment';
+import { CommentContainer, CommentForm } from '../../components/Comment';
 import { PostMeta, PostBody } from '../../components/Post';
 
 import useComments from '../../lib/hooks/useComments';
@@ -63,6 +63,7 @@ const Post = ({ post, initialComments }: { post: PostProps; initialComments: Com
         <PostBody title={title} excerpt={excerpt} content={content} />
 
         <CommentContainer>
+          <CommentForm slug={slug} commentCount={commentCount} />
           <CommentList comments={comments} />
         </CommentContainer>
       </div>
