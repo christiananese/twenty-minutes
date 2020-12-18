@@ -14,7 +14,7 @@ export interface PostProps {
 const PostCard = ({ title, slug, excerpt, featureImage, isFeatured, commentCount }: PostProps) => {
   return (
     <article
-      className={`flex flex-col rounded overflow-hidden sm:col-span-2 md:col-span-4 ${
+      className={`flex flex-col rounded-lg overflow-hidden sm:col-span-2 md:col-span-4 ${
         isFeatured && 'sm:col-span-4 md:col-span-8 md:flex-row'
       }`}
     >
