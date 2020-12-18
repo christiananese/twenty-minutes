@@ -23,7 +23,7 @@ const PostCard = ({ title, slug, excerpt, featureImage, isFeatured, commentCount
           <div className="w-full">
             <Image width="600" height="400" src={featureImage} alt={title} />
           </div>
-          <div className="flex flex-col p-4">
+          <div className="flex flex-col p-4 text-gray-800">
             <h1 className="text-2xl">{title}</h1>
             <p className="text-base">{excerpt}</p>
             <div className="grid gap-4 grid-flow-col auto-cols-max">

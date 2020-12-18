@@ -36,7 +36,7 @@ export const CommentForm = ({ slug, commentCount }: CommentFormProps) => {
 
   return (
     <div className="border-t-2 border-gray-600 py-8">
-      <h2 className="text-2xl mb-4">{commentCount} Kommentare</h2>
+      <h2 className="text-2xl mb-4 text-gray-800">{commentCount} Kommentare</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="block mb-4">
           <span className="text-sm text-gray-600">Name (optional)</span>

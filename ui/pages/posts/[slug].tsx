@@ -3,6 +3,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
+import { motion } from 'framer-motion';
+
 import PageContainer from '../../components/PageContainer';
 import { CommentContainer, CommentForm } from '../../components/Comment';
 import { PostMeta, PostBody, PostBackLink } from '../../components/Post';
@@ -27,6 +29,32 @@ interface CommentProps {
   updatedAt: Date;
 }
 
+const fadeInUp = {
+  initial: {
+    y: 40,
+    opacity: 0,
+    transition: { duration: 0.6 }
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.6
+    }
+  },
+  exit: {
+    opacity: 0
+  }
+};
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.5
+    }
+  }
+};
+
 const CommentList = dynamic(() => import('../../components/Comment/CommentList'), {
   ssr: false
 });
@@ -47,13 +75,16 @@ const Post = ({ post, initialComments }: { post: PostProps; initialComments: Com
 
   return (
     <PageContainer>
-      <div className="grid grid-cols-6 md:grid-cols-12 md:max-w-screen-lg">
+      <motion.div variants={stagger} className="grid grid-cols-6 md:grid-cols-12 md:max-w-screen-lg">
         <PostBackLink />
 
         {featureImage && (
-          <div className="w-full rounded-lg overflow-hidden row-start-2 col-start-1 col-span-6 md:col-span-12">
+          <motion.div
+            variants={fadeInUp}
+            className="w-full rounded-lg overflow-hidden row-start-2 col-start-1 col-span-6 md:col-span-12"
+          >
             <Image width="1200" height="600" layout="responsive" src={featureImage} />
-          </div>
+          </motion.div>
         )}
 
         <PostMeta updatedAt={updatedAt} commentCount={localCount} />
@@ -64,7 +95,7 @@ const Post = ({ post, initialComments }: { post: PostProps; initialComments: Com
           <CommentForm slug={slug} commentCount={localCount} />
           <CommentList comments={comments} />
         </CommentContainer>
-      </div>
+      </motion.div>
     </PageContainer>
   );
 };
