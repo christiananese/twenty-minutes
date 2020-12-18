@@ -63,7 +63,7 @@ export class PostsService {
     comment.createdAt = timestamp;
     comment.updatedAt = timestamp;
 
-    post.comments.push(comment);
+    post.comments.unshift(comment);
     post.commentCount = post.comments.length;
 
     return comment;
